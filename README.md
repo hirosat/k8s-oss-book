@@ -1,6 +1,6 @@
 # k8s-oss-book
 
-- [1章 - 速習！Docker/Kubernetesとクラウドネイティブの最新事情](jp/chapter01.md)
+- [1章 - 速習！コンテナ・Kubernetes・クラウドネイティブの概要](jp/chapter01.md)
 - [2章 - GitOps を始めよう](jp/chapter02.md)
 - [3章 - コンテナ環境のセットアップ](jp/chapter03.md)
 - [4章 - コンテナを作ろう](jp/chapter04.md)
