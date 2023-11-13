@@ -1,4 +1,4 @@
-# Chapter 06
+# 6章 - Kubernetesを使おう
 
 ## 訂正・フィードバック
 
