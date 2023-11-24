@@ -41,3 +41,5 @@ $ docker run -p 80:80 -d --name nginx-test nginx:latest
 ```
 docker ps
 ```
+
+※. コンテナを停止するには、コンテナを作成した端末で、`Ctrl + C`を実行
