@@ -82,62 +82,62 @@
 しばらく待つと、Ubuntuの設定画面に変わります。<br>
 最初は、**言語の選択**です。Server用途で使うので、そのまま「**English**」にしましょう。
 
-<img src="./images/13-language.png" width="50%">
+<img src="./images/13-language.png" width="100%">
 <br><br>
 
 もしDHCP等により、既にネットワークが自動構成されている場合は、ここで新たなバージョンを利用するか聞かれます。<br>
 ここでは、「**Continue without updating**」とします。
 
-<img src="./images/14-update-info.png" width="50%">
+<img src="./images/14-update-info.png" width="100%">
 <br><br>
 
 次は**キーボードレイアウト**です。お使いのキーボードレイアウトに合わせて選択して下さい。
 
-<img src="./images/15-key-layout.png" width="50%">
+<img src="./images/15-key-layout.png" width="100%">
 <br><br>
 
 **インストールタイプ**を選択できます。デフォルトの「**Ubuntu Server**」で問題ありません。
 
-<img src="./images/16-install-type.png" width="50%">
+<img src="./images/16-install-type.png" width="100%">
 <br><br>
 
 **ネットワーク設定**では、お使いの状況に合わせて設定し、次に進みます。
 - **DHCP** : 利用可能な場合は、既にIPアドレスが表示されているはずなので、そのまま次に進みます。
 - **マニュアル** : 「**ens34**」→「**Edit IPv4**」と選択し、「**IPv4 Method**」を「**Manual**」にすると、手動設定することができます。
 
-<img src="./images/17-network-settings.png" width="50%">
+<img src="./images/17-network-settings.png" width="100%">
 <br><br>
 
 **Proxy設定**。直接インターネットに接続できない環境の場合のみ、設定が必要です。
 
-<img src="./images/18-proxy.png" width="50%">
+<img src="./images/18-proxy.png" width="100%">
 <br><br>
 
 **Ubuntuパッケージのミラーサイト設定**。「**This mirror location passed tests**」を確認し、次に進みます。<br>
 必要に応じて、別のミラーサイトを設定することも可能です。
 
-<img src="./images/19-mirror.png" width="50%">
+<img src="./images/19-mirror.png" width="100%">
 <br><br>
 
 **ストレージ設定**。必要に応じて、**LVM**や**暗号化**などを設定できますが、そのまま次に進みます。
 
-<img src="./images/20-storage.png" width="50%">
+<img src="./images/20-storage.png" width="100%">
 <br><br>
 
 **ストレージ設定の確認画面**。先に進むと、確認ウィンドウが出るので、「**Confirm**」を選択。
 
-<img src="./images/21-storage-confirm.png" width="50%">
+<img src="./images/21-storage-confirm.png" width="100%">
 <br><br>
 
 **プロファイル設定**。<br>
 **あなたの名前**と、**サーバ名**と、ログイン時に使用する**ユーザ名**および**パスワード**を登録します。
 
-<img src="./images/22-user.png" width="50%">
+<img src="./images/22-user.png" width="100%">
 <br><br>
 
 **Ubuntu Proサブスクリプション**設定。何も入力しなくても、先に進めます。
 
-<img src="./images/23-ubuntu-pro.png" width="50%">
+<img src="./images/23-ubuntu-pro.png" width="100%">
 <br><br>
 
 **SSH設定**。これは、セットアップ後のリモートログインが容易になるので、**結構重要**です。
@@ -146,18 +146,18 @@
 * **GitHub username** : 上記の設定を行う場合、自分の**GitHubアカウント**を入力します。
 * **Allow password authentication over SSH** : チェック(**X**)を入れる。
 
-<img src="./images/24-ssh-setup.png" width="50%">
+<img src="./images/24-ssh-setup.png" width="100%">
 <br><br>
 
 **追加パッケージの選択**。後で必要なものは個別で入れるので、基本は必要ありません。<br>
 次に進むと、インストールが始まります。
 
-<img src="./images/25-add-package.png" width="50%">
+<img src="./images/25-add-package.png" width="100%">
 <br><br>
 
 インストール完了後は、「**Reboot Now**」を選び、再起動します。
 
-<img src="./images/26-confirm.png" width="50%">
+<img src="./images/26-confirm.png" width="100%">
 <br><br>
 
 ※. 以下のように、「**Failed unmounting /cdrom.**」のメッセージが出る場合、対応が必要です。<br>
@@ -165,13 +165,13 @@
 2. 「**編集**」で、「**CD/DVDドライブ1**」を「**ホストデバイス**」にします。
 3. 再度、「**パワーオン**」します。
 
-<img src="./images/27-failed-unmount.png" width="40%">
-<img src="./images/28-cd-drive.png" width="50%">
+<img src="./images/27-failed-unmount.png" width="100%">
+<img src="./images/28-cd-drive.png" width="100%">
 <br><br>
 
 「**(サーバ名) login:**」のプロンプトが表示されれば、セットアップ完了です。コンソールを閉じて下さい。
 
-<img src="./images/29-login.png" width="30%">
+<img src="./images/29-login.png" width="50%">
 <br><br>
 
 ## Ubuntuへのアクセス
