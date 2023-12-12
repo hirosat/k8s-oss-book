@@ -8,6 +8,13 @@
 
 - [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/) : 全APIの説明を網羅
 - [kuard](https://github.com/kubernetes-up-and-running/kuard) : Demo用アプリケーション
+- [Kubernetes Job](https://kubernetes.io/docs/concepts/workloads/controllers/job/) : Jobリソースのサンプルと解説
+- [GKEドキュメント](https://cloud.google.com/kubernetes-engine/docs?hl=ja)
+  - [NodePortタイプのServiceの作成](https://cloud.google.com/kubernetes-engine/docs/how-to/exposing-apps?hl=ja#creating_a_service_of_type_nodeport)
+  - [LoadBalancerタイプのServiceの作成](https://cloud.google.com/kubernetes-engine/docs/how-to/exposing-apps?hl=ja#creating_a_service_of_type_loadbalancer)
+- [MetalLB](https://metallb.universe.tf/)
+  - [INSTALLATION](https://metallb.universe.tf/installation/)
+  - [Layer 2 Congiruration](https://metallb.universe.tf/configuration/)
 
 ## コード集
 
@@ -32,6 +39,9 @@ kubectl config use-context kubernetes-admin@kubernetes
 ```
 kubectl config current-context
 ```
+
+<br><br>
+
 ### Kubernetes操作の考え方
 #### 1. kubectl の使い方を調べる
 
@@ -160,6 +170,8 @@ nginx2-pod 内でenvコマンドを実行 (※. 結果の中に、APPNAME=myapp 
 kubectl exec nginx2-mod -- env
 ```
 
+<br><br>
+
 ### Podへのアクセス方法
 #### 1. Podに直接ログイン
 nginx Pod内に入る方法
@@ -212,10 +224,14 @@ localhost:8080
 ```
 アクセスを確認できたら、`kubectl port-forward`している端末上で**Ctrl+C**をして停止しましょう。
 
+<br><br>
+
 ### Podの削除方法
 ```
 kubectl delete pod nginx nginx2 nginx2-mod
 ```
+
+<br><br>
 
 ### KubernetesのWorkloadリソースについて
 #### Pod / ReplicaSet / Deployment
@@ -323,6 +339,8 @@ Deploymentの削除
 kubectl delete -f my-dep.yaml
 ```
 
+<br><br>
+
 #### Job / CronJob
 
 (別端末) Pod状態の監視
@@ -380,6 +398,8 @@ kubectl delete cronjob my-job
 kubectl get cronjobs,jobs,pod
 ```
 
+<br><br>
+
 #### DaemonSet
 DaemonSetの作成
 ```
@@ -431,7 +451,7 @@ kubectl delete daemonsets ds-nginx
 kubectl get daemonsets,pod
 ```
 
-<br>
+<br><br>
 
 ### KubernetesのServiceリソースについて
 #### Service type: ClusterIP 
