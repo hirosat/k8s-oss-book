@@ -18,11 +18,15 @@ nodes:
 - role: worker
   extraPortMappings:
   - containerPort: 30080
-    hostPort: 9880
+    hostPort: 30080
+  - containerPort: 30443
+    hostPort: 30443
 EOF
 ```
 - **containerPort** : NodePort用に使用する、30000-32767の範囲内の**任意のport番号**
 - **hostPort** : ローカルPCに転送する**任意のport番号**。 ※. ローカルPCで既に使われているport番号は使用できないので注意。
+
+上記の例では、http(80)アクセス用とhttps(443)アクセス用に**2つの接続用port**を用意しています。もし **複数の「type:NodePort」** を扱いたい場合、必要数分のportを**事前に用意**しておく必要があります。
 
 #### kindクラスタの再作成
 ```

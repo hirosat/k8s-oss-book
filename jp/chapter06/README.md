@@ -582,7 +582,9 @@ EOF
 
 マニフェストの適用
 ```
-kubectl apply -f first-pool.yaml l2adv.yaml
+kubectl apply -f first-pool.yaml
+
+kubectl apply -f l2adv.yaml
 ```
 
 Service type:LoadBalancer用マニフェストの作成
