@@ -69,6 +69,8 @@ whois hirosat.com
 curl www.hirosat.com -s | grep Demo
 ```
 
+---
+
 #### ワイルドカードDNSレコード
 ワイルドカードDNSレコードの挙動テスト (※. あなたのDNSレコードに置き換えましょう)
 ```
@@ -81,8 +83,10 @@ nslookup hoge.my-app.hirosat.com
 nslookup fuga.my-app.hirosat.com
 ```
 
+---
 
 ### Ingressの利用
+
 #### Contourの導入
 Contourのインストール
 ```
@@ -110,6 +114,8 @@ kubectl get daemonset -n projectcontour
 > ```
 > kubectl get service -n projectcontour envoy
 > ```
+
+---
 
 #### Ingressリソースの使用
 
@@ -170,6 +176,8 @@ cat << EOF >> httpbin.yaml
 EOF
 ```
 
+---
+
 マニフェストの適用とIngressの確認
 ```
 kubectl apply -f httpbin.yaml
@@ -190,6 +198,7 @@ curl -sH "Host:hoge.com" $IP | grep '<title>'
 curl -s $IP | grep '<title>'
 ```
 
+---
 #### ワイルドカードDNSレコードの活用
 DNSレコードの内容に合わせて、httpbin.yaml を修正
 ```
