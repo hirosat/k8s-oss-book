@@ -431,7 +431,7 @@ vi src/App.css
 
 git diff
 
-git add -a
+git add .
 
 git commit -m “bg changed to green”
 
