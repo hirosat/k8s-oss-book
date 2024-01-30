@@ -1,4 +1,4 @@
-# （パターン3） ローカル環境の利用
+# （パターン1） ローカル環境で kind を利用
 
 ## リンク一覧
 
@@ -19,10 +19,10 @@ Windowsの場合
 
 ```
 # ダウンロード
-curl -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.19.0/kind-windows-amd64
+curl -Lo kind.exe https://kind.sigs.k8s.io/dl/v0.19.0/kind-windows-amd64
 
 # Pathの通った場所に移動
-mv ./kind-windows-amd64.exe ~/bin/kind.exe
+mv ./kind.exe ~/bin/
 ```
 
 Macの場合
@@ -35,7 +35,7 @@ curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.19.0/kind-darwin-arm64
 chmod +x ./kind
 
 # PATHの通った場所に移動
-mv ./kind /usr/local/bin/kind
+sudo mv ./kind /usr/local/bin/
 ```
 
 動作確認

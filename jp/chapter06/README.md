@@ -32,7 +32,7 @@ kubectl config get-contexts
 
 コンテキストの切り替え
 ```
-kubectl config use-context kubernetes-admin@kubernetes
+kubectl config use-context kubeadm
 ```
 
 現在のコンテキスト名を表示
@@ -175,8 +175,13 @@ kubectl exec nginx2-mod -- env
 ### Podへのアクセス方法
 #### 1. Podに直接ログイン
 nginx Pod内に入る方法
+
 ```
+# Mac の場合
 kubectl exec nginx -i -t -- bash
+
+# Windows (Git Bash) の場合
+winpty kubectl exec nginx -i -t -- bash
 ```
 
 (nginx pod内) localhostのコンテンツを取得
@@ -303,9 +308,9 @@ status: {}
 EOF
 ```
 
-(別端末) watchコマンドで監視
+(別端末) Podの状態を追跡
 ```
-watch kubectl get pod
+kubectl get pod -w
 ```
 
 現在のRevision(Deploymentの世代)番号を確認
@@ -320,7 +325,7 @@ kubectl apply -f my-dep.yaml
 
 Podとリビジョンの履歴を確認
 ```
-kubectl get pod
+kubectl get replicaset
 
 kubectl rollout history deployment/my-dep
 ```
@@ -590,6 +595,16 @@ kubectl apply -f l2adv.yaml
 Service type:LoadBalancer用マニフェストの作成
 ```
 kubectl expose deployment my-app --port=80 --target-port=8080 --name=my-app3 --type=LoadBalancer --dry-run=client -o yaml > service-my-app3.yaml
+```
+
+(※. Google Cloudのみ) ロードバランサ用アノテーションの追加
+```
+vi service-my-app.yaml
+
+(※. 途中省略。metadataフィールド以下に、以下のアノテーションを追加)
+metadata:
+  annotations:
+    cloud.google.com/l4-rbs: "enabled"
 ```
 
 マニフェストの適用とService確認

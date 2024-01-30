@@ -1,4 +1,4 @@
-# （パターン2） クラウドサービスの利用
+# （パターン2） Google Cloud の利用
 
 ## リンク一覧
 
@@ -17,17 +17,7 @@
 $ python3 -V
 ```
 
-Google SDK のダウンロード 
-```
-wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-408.0.1-darwin-x86_64.tar.gz
-
-tar zxvf google-cloud-cli-408.0.1-darwin-x86_64.tar.gz
-```
-
-gcloud CLIのインストール
-```
-./google-cloud-sdk/install.sh
-```
+google CLI のインストール (※. [ドキュメント](https://cloud.google.com/sdk/docs/install?hl=ja) の各OSの指示に従って下さい)
 
 gcloud CLIの動作確認
 ```
@@ -54,4 +44,11 @@ kubectl config current-context
 GKEノード状態の確認
 ```
 kubectl get node
+```
+
+### Google Cloud の課金を抑えるTips
+
+K8sノードのリソース占有状況を確認
+```
+kubectl describe node
 ```

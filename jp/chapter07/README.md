@@ -12,7 +12,9 @@
   - [GoDaddy](https://www.godaddy.com/) : ドメイン登録数世界一の実績を誇る
   - [お名前.com](https://www.onamae.com/) : 日本最大のドメイン登録実績を誇る
   - [Freenom](https://www.freenom.com/) : 非推奨
-    - [Unable to update DDNS using API for some TLDs](https://community.cloudflare.com/t/unable-to-update-ddns-using-api-for-some-tlds/167228) : DNSサービス側で、無料TLD (.cf / .ga / .gq / .ml / .tk) を禁止している事例
+    - [Unable to update DDNS using API for some TLDs](https://community.cloudflare.com/t/unable-to-update-ddns-using-api-for-some-tlds/167228) : Cloudflare で、無料TLD (.cf / .ga / .gq / .ml / .tk) を禁止している事例
+- [sslip.io](https://sslip.io)
+- [nip.io](https://nip.io)
 - [Supported DNS01 providers](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers) : **cert-menager**の**DNS連携機能**に対応するプロバイダ一覧
 - [Cloudflare](https://www.cloudflare.com/)
 
@@ -52,6 +54,16 @@
 ## コード集
 
 ### ドメインの利用
+
+#### ドメインの取得方法
+
+sslip.ioによる正引きの例
+```
+dig +short 192.168.5.1.sslip.io
+
+dig +short hoge.10-0-0-1.sslip.io
+```
+
 #### レコード登録とK8sとの連携
 
 DNSレコードの正引き情報を問い合わせ (※. あなたのDNSレコードに置き換えましょう)
@@ -185,7 +197,7 @@ kubectl apply -f httpbin.yaml
 kubectl get ingress
 ```
 
-curlにホストヘッダを付けて**偽装**することで、DNS登録せずにIngressのルーティングを確認する方法
+curlにホストヘッダを付けて**偽装**することで、DNS登録せずにIngressのルーティングを確認する方法 (※. kindの場合、$IP の箇所は $IP:30080 と指定します。)
 ```
 IP="外部IPアドレス(LB、または、NodePortの場合はノードIP)"
 

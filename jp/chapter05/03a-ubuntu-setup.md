@@ -1,4 +1,4 @@
-# ESXi上にUbuntuをセットアップする方法
+# (おまけ) ESXi 上に Ubuntu をセットアップする方法
 
 ## Ubuntu のダウンロード
 

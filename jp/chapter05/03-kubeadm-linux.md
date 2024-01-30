@@ -1,4 +1,4 @@
-# （パターン1） Linuxサーバの利用
+# （パターン３） Linuxサーバで kubeadm を利用
 
 ## 概要
 
@@ -15,27 +15,19 @@
 - [NUCで始めるVMware Tanzu](https://qiita.com/advent-calendar/2020/nuc-vmware-tanzu)
   - [(2日目) NUC紹介](https://qiita.com/hirosat/items/9b9885f229d696ca1788) : ベアボーン用パーツの選定方法を紹介
   - [(4日目) NUCのセットアップ](https://qiita.com/hirosat/items/bd4c67f7d248cef640db) : ベアボーンにパーツをセットアップする様子を紹介
-- [VMware vSphere Hypervisor 8 製品評価センター](https://customerconnect.vmware.com/jp/evalcenter?p=free-esxi8) : ESXi(isoファイル)のダウンロードが可能(要アカウント作成)
-- [VMUG](https://www.vmug.com/)
-  - [VMUG Advantage](https://www.vmug.com/membership/vmug-advantage-membership/)
+  - [(5日目) ESXiのセットアップ](https://qiita.com/hirosat/items/e78d75f0032f0f1369f0) : MacでESXiをセットアップする例を紹介
 
-## 2. ESXiのインストール
+## 2. ハイパーバイザーのインストール
 
 ### リンク一覧
 
-- [VMware vSphere Hypervisor 8 製品評価センター](https://customerconnect.vmware.com/jp/evalcenter?p=free-esxi8) : ESXi(isoファイル)のダウンロードが可能(要アカウント作成)
-  - [やってみよう！ 初めての無償版ESXi](https://blogs.vmware.com/vmware-japan/2014/05/vspherehypervisor.html) : 無償版ESXiの基礎知識に関するブログ
-- [NUCで始めるVMware Tanzu](https://qiita.com/advent-calendar/2020/nuc-vmware-tanzu)
-  - [(5日目) ESXiのセットアップ](https://qiita.com/hirosat/items/e78d75f0032f0f1369f0) : MacでESXiをセットアップする例を紹介
+- [Proxmox VE](https://proxmox.com/)
+- [VMUG](https://www.vmug.com/)
+  - [VMUG Advantage](https://www.vmug.com/membership/vmug-advantage-membership/)
+- [やってみよう！ 初めての無償版ESXi](https://blogs.vmware.com/vmware-japan/2014/05/vspherehypervisor.html) : ESXiの基礎知識に関するブログ
 - [はじめよう、おうちクラウド](https://github.com/tuna-jp/ouchi-cloud/tree/main) : Software Design 誌に掲載された連載、「(VMware x Kubernetes) **はじめよう、おうちクラウド**」を紹介したGitHubサイト。筆者も執筆に携わっている。
   - [第3回 仮想化基盤を作ってみよう](https://github.com/tuna-jp/ouchi-cloud/blob/main/vol3/README.md)
-    - [ESXiのインストールと基本設定](https://github.com/tuna-jp/ouchi-cloud/blob/main/vol3/03_esxi_setup.md) : ESXiのインストールに加え、ESXiの初期設定やvSphere Clientの初期操作についても、詳しく書かれています。
-
-### 補足
-Windowsで、ダウンロードしたISOファイルを**USBメモリ**に展開するには、**Rufus** や **UNetbootin** といったフリーソフトを利用すると、簡単に作成できるはずです。
-
-- [Rufus](https://rufus.ie/ja/)
-- [UNetbootin](https://unetbootin.github.io/)
+    - [ESXiのインストールと基本設定](https://github.com/tuna-jp/ouchi-cloud/blob/main/vol3/03_esxi_setup.md) : ESXiのインストールに加え、ESXiの初期設定やvSphere Clientの初期操作について紹介。
 
 ## 3. ゲストOS (Ubuntu) のインストール
 
@@ -43,7 +35,7 @@ Windowsで、ダウンロードしたISOファイルを**USBメモリ**に展開
 
 別ページにセットアップ方法を用意しました。
 
-- [ESXi上にUbuntuをセットアップする方法](./01a-ubuntu-setup.md)
+- [(おまけ) ESXi上にUbuntuをセットアップする方法](./01a-ubuntu-setup.md)
 
 ## 4. 必要パッケージのインストール
 
@@ -56,6 +48,15 @@ Windowsで、ダウンロードしたISOファイルを**USBメモリ**に展開
   - [Container Runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) ([日本語版](https://kubernetes.io/ja/docs/setup/production-environment/container-runtimes/)) : コンテナランタイムに関しては、こちらを参照
 - [docker docs](https://docs.docker.com/)
   - [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) : Docker用aptリポジトリ登録の方法を参照する
+
+### Swapの無効化
+```
+sudo swapoff -a
+
+sudo vi /etc/fstab
+(※. 以下のswap設定行について、行頭に#を付けて、コメントアウトする)
+# /swap.img none swap sw 0 0
+```
 
 ### カーネルモジュールのロード
 
