@@ -335,7 +335,7 @@ kubectl exec pod-volume -- cat /config/player_name
 
 環境変数で設定したPodのConfigMap設定を確認
 ```
-kubectl exec pod-env-cm -- printenv player_name
+kubectl exec pod-env-cm -- printenv USERINFO
 ```
 
 今まで作成したオブジェクトの削除
@@ -596,14 +596,14 @@ kubectl run -i -t --rm --image=brix4dayz/swiss-army-knife -- sh
 
 Headless Serviceによる名前解決
 ```
-nslookup web-svc
+nslookup sts-app
 
-nslookup web-sts-0.web-svc
+nslookup web-sts-0.sts-app
 ```
 
 Service名を指定して、curlでWebページにアクセス（※. 何度か実行）
 ```
-curl web-svc
+curl sts-app
 ```
 
 Pod名を指定して、curlでWebページにアクセス
