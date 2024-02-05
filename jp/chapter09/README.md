@@ -88,7 +88,7 @@ curl -LO https://github.com/vmware-tanzu/pinniped/releases/download/$VER/$TARGET
 
 chmod +x $TARGET
 
-mv $TARGET /usr/local/bin/
+sudo mv $TARGET /usr/local/bin/pinniped
 ```
 
 Windows環境のPinniped CLIインストール方法 (※.VER変数は最新のものに置き換える)
@@ -99,7 +99,7 @@ TARGET=pinniped-cli-windows-amd64.exe
 
 curl -LO https://github.com/vmware-tanzu/pinniped/releases/download/$VER/$TARGET
 
-mv $TARGET ~bin/
+mv $TARGET ~/bin/pinniped.exe
 ```
 
 Pinniped CLIの動作確認
@@ -136,7 +136,7 @@ kubectl create secret generic demo \
 kubectl get secret local-user-authenticator-tls-serving-certificate \
   --namespace local-user-authenticator \
   -o jsonpath={.data.caCertificate} \
-  | tee /tmp/local-user-authenticator-ca-base64-encoded
+  | tee ./local-user-authenticator-ca-base64-encoded
 ```
 
 Conciergeの接続先設定
@@ -149,27 +149,27 @@ metadata:
 spec:
   endpoint: https://local-user-authenticator.local-user-authenticator.svc/authenticate
   tls:
-    certificateAuthorityData: $(cat /tmp/local-user-authenticator-ca-base64-encoded)
+    certificateAuthorityData: $(cat ./local-user-authenticator-ca-base64-encoded)
 EOF
 ```
 
-pinniped CLIで認証して、kubeconfigを生成
+pinniped CLIで認証して、demoユーザ用のkubeconfigを生成
 ```
 pinniped get kubeconfig \
   --static-token "demo:password123" \
   --concierge-authenticator-type webhook \
   --concierge-authenticator-name local-user-authenticator \
-  > /tmp/demo-kubeconfig
+  > ./demo-kubeconfig
 ```
 
 生成したkubeconfigの情報を表示
 ```
-pinniped whoami --kubeconfig /tmp/demo-kubeconfig
+pinniped whoami --kubeconfig ./demo-kubeconfig
 ```
 
 生成したkubeconfigを使用して、pod情報を取得
 ```
-kubectl --kubeconfig /tmp/demo-kubeconfig get pods -n pinniped-concierge
+kubectl --kubeconfig ./demo-kubeconfig get pods -n pinniped-concierge
 ```
 
 管理者ユーザで、demoユーザにクラスタの読み取り権限を付与
@@ -179,7 +179,7 @@ kubectl create clusterrolebinding demo-view --clusterrole view --user demo
 
 再び、生成したkubeconfigを使用して、pod情報を取得
 ```
-kubectl --kubeconfig /tmp/demo-kubeconfig get pods -n pinniped-concierge
+kubectl --kubeconfig ./demo-kubeconfig get pods -n pinniped-concierge
 ```
 
 ---
@@ -315,6 +315,15 @@ helm search repo wordpress
 ---
 
 ##### Chartのインストール
+
+default StorageClassの設定 (※. 既にdefaultが存在する場合は、そちらを使っても良い。)
+```
+kubectl get storageclass
+
+kubectl patch storageclass csi-hostpath-sc -p \
+'{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+
 wordpress chartをインストール
 ```
 helm install my-wordpress bitnami/wordpress
@@ -430,13 +439,24 @@ Chartの状態を再確認
 helm status my-wordpress
 ```
 
-WordpressのURLを取得
+WordpressのURLを取得 (LoadBalancerの場合)
 ```
 export SERVICE_IP=$(kubectl get svc --namespace default my-wordpress --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
 
 echo "WordPress URL: http://$SERVICE_IP/"
 
 echo "WordPress Admin URL: http://$SERVICE_IP/admin"
+```
+
+WordpressのURLを取得 (NodePortの場合)
+```
+$ export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services my-wordpress)
+
+$ export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+
+$ echo "WordPress URL: http://$NODE_IP:$NODE_PORT/"
+
+$ echo "WordPress Admin URL: http://$NODE_IP:$NODE_PORT/admin"
 ```
 
 Wordpressのユーザとパスワードを取得

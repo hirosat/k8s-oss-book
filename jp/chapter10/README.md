@@ -21,6 +21,7 @@
   - [Scanner Adaptorの検証状況](https://goharbor.io/docs/2.9.0/install-config/harbor-compatibility-list/#scanner-adapters)
 - [NFS Ganesha server and external provisioner](https://github.com/kubernetes-sigs/nfs-ganesha-server-and-external-provisioner)
   - [Helmチャート(ArtifactHub)](https://artifacthub.io/packages/helm/nfs-ganesha-server-and-external-provisioner/nfs-server-provisioner)
+- [Cosign](https://github.com/sigstore/cosign)
 
 ### CIツールについて
 
@@ -602,7 +603,7 @@ kubectl get deploy kp-sample
 
 kustomization.yaml を設置してpush
 ```
-cd ~/GitHub/argocd-manifests
+cd ~/git/argocd-manifests
 
 cat << EOF > k8s-oss-sample-app/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
