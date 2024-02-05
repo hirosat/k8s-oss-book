@@ -381,7 +381,7 @@ Imageの作成(ビルドの実行)
 ```
 GIT=https://github.com/hirosat/k8s-oss-sample-app  #あなたのリポジトリを入力
 
-kp image save my-image -c kp-builder --tag $DOMAIN --git $GIT
+kp image save my-image -c kp-builder --tag $DOMAIN/kpack/app --git $GIT
 ```
 
 ビルド中の状態を確認
